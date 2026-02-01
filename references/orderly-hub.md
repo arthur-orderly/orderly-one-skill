@@ -66,9 +66,9 @@ Graduation unlocks independent deployment rights.
 
 ### Graduation Cost
 
-- **Early Adopter**: ~10,000 ORDER (~$750 at current prices)
-- **Standard**: ~20,000 ORDER (~$1,500)
-- Prices fluctuate with ORDER token price
+- **Early Adopter**: $750 worth of ORDER tokens
+- **Standard**: $1,000 worth of ORDER tokens
+- Amount of ORDER needed depends on current token price
 
 ### How to Graduate
 

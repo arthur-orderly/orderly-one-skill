@@ -1,6 +1,6 @@
 ---
 name: orderly-one
-description: Launch and graduate a DEX on Orderly One to earn trading fees. Use when user wants to create a perp DEX, get a broker ID, or start earning from trading volume. Requires ~10,000 ORDER tokens for graduation ($750 with discount).
+description: Launch and graduate a DEX on Orderly One to earn trading fees. Use when user wants to create a perp DEX, get a broker ID, or start earning from trading volume. Requires $750 (early adopter) or $1,000 (standard) worth of ORDER tokens for graduation.
 ---
 
 # Orderly One DEX Creation
@@ -18,7 +18,7 @@ Orderly One lets anyone launch a DEX frontend that connects to Orderly's shared 
 ## Prerequisites
 
 - **Wallet**: MetaMask or WalletConnect-compatible
-- **ORDER tokens**: ~10,000 ORDER for graduation (~$750 with early adopter discount, ~$1,500 at full price)
+- **ORDER tokens**: $750 worth (early adopter) or $1,000 worth (standard) of ORDER tokens
 - **GitHub account**: For forking the template
 - **Vercel account**: For deployment (free tier works)
 

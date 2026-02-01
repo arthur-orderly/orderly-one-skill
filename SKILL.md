@@ -34,7 +34,7 @@ Orderly One lets anyone launch a DEX frontend that connects to Orderly's shared 
 Graduation unlocks independent deployment (vs embedded iframe).
 
 1. In Orderly One Hub, find "Graduate" section
-2. Stake required ORDER tokens (~10,000 with discount)
+2. Pay $1,000 USDC or $750 worth of ORDER tokens
 3. Wait for graduation confirmation
 4. You now have deployment rights
 

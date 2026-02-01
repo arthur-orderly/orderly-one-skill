@@ -10,7 +10,7 @@
  * 
  * Requirements:
  *   - Wallet JSON with privateKey
- *   - ~10,000 ORDER tokens in wallet
+ *   - $750 worth of ORDER tokens (or $1,000 USDC)
  *   - ETH for gas on supported chain (Base recommended)
  */
 
@@ -86,9 +86,9 @@ const ERC20_ABI = [
 ];
 
 const ORDERLY_ONE_API = 'https://dex-api.orderly.network';
-const GRADUATION_COST_USD = 750; // With ORDER discount
-const ORDER_PRICE_USD = 0.08; // Approximate, should fetch live
-const REQUIRED_ORDER = Math.ceil(GRADUATION_COST_USD / ORDER_PRICE_USD);
+const GRADUATION_COST_USDC = 1000; // Standard price
+const GRADUATION_COST_ORDER_USD = 750; // 25% discount with ORDER tokens
+// Note: Actual ORDER amount needed = $750 / current ORDER price
 
 class OrderlyOneGraduator {
   constructor(walletPath, dexName, chainKey) {
@@ -134,15 +134,15 @@ class OrderlyOneGraduator {
     const orderFormatted = parseFloat(ethers.formatUnits(orderBalance, decimals)).toFixed(2);
     console.log(`  ORDER: ${orderFormatted}`);
     
-    // Check requirements
-    const hasEnoughOrder = parseFloat(orderFormatted) >= REQUIRED_ORDER;
+    // Check requirements (can't know exact ORDER needed without live price)
     const hasEnoughEth = parseFloat(ethFormatted) >= 0.001;
     
     console.log(`\n📋 Requirements:`);
-    console.log(`  ORDER: ${hasEnoughOrder ? '✅' : '❌'} Need ~${REQUIRED_ORDER}, have ${orderFormatted}`);
-    console.log(`  ETH:   ${hasEnoughEth ? '✅' : '❌'} Need ~0.001 for gas, have ${ethFormatted}`);
+    console.log(`  Graduation: $1,000 USDC or $750 worth of ORDER (25% discount)`);
+    console.log(`  ORDER balance: ${orderFormatted}`);
+    console.log(`  ETH (gas): ${hasEnoughEth ? '✅' : '❌'} Need ~0.001, have ${ethFormatted}`);
     
-    return { hasEnoughOrder, hasEnoughEth, orderBalance, ethBalance };
+    return { hasEnoughEth, orderBalance, ethBalance, orderFormatted };
   }
   
   async checkBrokerAvailability() {
@@ -195,17 +195,15 @@ class OrderlyOneGraduator {
     // Check broker availability
     const broker = await this.checkBrokerAvailability();
     
-    if (!balances.hasEnoughOrder || !balances.hasEnoughEth) {
-      console.log('\n❌ Insufficient funds for graduation');
+    if (!balances.hasEnoughEth) {
+      console.log('\n❌ Insufficient ETH for gas');
       console.log('\n💡 To proceed:');
-      if (!balances.hasEnoughOrder) {
-        console.log(`   Send ~${REQUIRED_ORDER} ORDER to ${this.wallet.address}`);
-      }
-      if (!balances.hasEnoughEth) {
-        console.log(`   Send ~0.01 ETH to ${this.wallet.address} on ${this.chain.name}`);
-      }
+      console.log(`   Send ~0.01 ETH to ${this.wallet.address} on ${this.chain.name}`);
       return null;
     }
+    
+    console.log(`\n💰 Graduation cost: $1,000 USDC or $750 worth of ORDER`);
+    console.log(`   Your ORDER balance: ${balances.orderFormatted}`);
     
     if (dryRun) {
       console.log('\n🔍 Dry run - not executing graduation');

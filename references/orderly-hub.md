@@ -1,164 +1,158 @@
-# Orderly One Hub Guide
+# Orderly One Platform Reference
 
-## What is Orderly One?
+> **URL:** https://dex.orderly.network
 
-Orderly One is a platform that lets anyone launch their own perpetual futures DEX by:
-- Providing shared liquidity across all DEXs
-- Handling the complex trading infrastructure
-- Offering whitelabel frontend templates
-- Managing settlement and risk
+## Platform Overview
 
-You focus on branding and user acquisition; Orderly handles the trading engine.
+Orderly One is a no-code AI-powered platform for creating perpetual futures DEXs. Launched September 2025.
 
-## Registration Process
+## Navigation
 
-### 1. Access the Hub
+- **Home** (`/`) - Landing page with "Start Building" CTA
+- **Board** (`/board`) - Browse all DEXs in the ecosystem
+- **Case Studies** (`/case-studies`) - Success stories
+- **Distributor** (`/distributor`) - Distributor program info
+- **My DEX** (`/dex`) - Manage your DEX (requires wallet connection)
 
-URL: https://orderlyonehub.orderly.network
+## Creating a DEX
 
-Supported wallets:
-- MetaMask
-- WalletConnect
-- Coinbase Wallet
-- And others
+### Step 1: Connect Wallet
+- Click "Start Building" or navigate to My DEX
+- Connect via MetaMask, WalletConnect, or supported wallets
+- Supports multiple EVM chains
 
-### 2. Connect Wallet
+### Step 2: AI Configuration
+- AI generates your DEX configuration
+- Customizable branding, themes, colors
+- Set social links and wallet options
 
-1. Click "Connect Wallet"
-2. Select your wallet provider
-3. Approve the connection
-4. Sign the message to authenticate
-
-### 3. Create Broker ID
-
-Your Broker ID is your unique identifier in the Orderly ecosystem.
-
-**Requirements:**
-- Lowercase letters, numbers, underscores only
-- Must be unique across all Orderly DEXs
-- Cannot be changed after creation
-
-**Examples:**
-- `my_dex`
-- `cryptotrade`
-- `arthur_orderly`
-
-### 4. Initial Setup (Sandbox)
-
-Before graduation, you can:
-- Test with the embedded iframe widget
-- Explore the dashboard
-- See sample analytics
-- Understand the revenue model
+### Step 3: Automatic Deployment
+- Orderly creates GitHub repository
+- Pattern: `OrderlyNetworkDexCreator/<dex-name>`
+- Deploys to GitHub Pages automatically
+- Default URL: `https://orderlynetworkdexcreator.github.io/<dex-name>`
 
 ## Graduation
 
-Graduation unlocks independent deployment rights.
+Graduation unlocks fee revenue sharing. Access via My DEX → Graduation.
 
-### Why Graduate?
+### What Graduation Provides
+1. **Fee Revenue** - Earn from trading fees
+2. **Broker ID** - Unique ecosystem identifier
+3. **Custom Fees** - Set your own fee structure
+4. **Board Listing** - Public visibility
+5. **WOOFi Revenue** - Swap fee earnings
 
-| Feature | Pre-Graduation | Post-Graduation |
-|---------|---------------|-----------------|
-| Deployment | Embedded iframe only | Full standalone app |
-| Customization | Limited | Full branding control |
-| Revenue Share | Lower tier | Higher tier |
-| Support | Community | Priority |
+### Fee Structure Post-Graduation
 
-### Graduation Cost
+Default fees (customizable):
+- Maker: 3 bps (0.03%)
+- Taker: 6 bps (0.06%)
+- RWA Maker: 0 bps
+- RWA Taker: 5 bps
 
-Two payment options:
-- **USDC**: $1,000
-- **ORDER tokens**: $750 worth (25% discount)
+Your revenue = Custom fee - Orderly base fee
 
-The ORDER option saves you $250 and supports the ecosystem.
+### Builder Staking Programme
 
-### How to Graduate
+Stake ORDER to reduce base fees:
 
-1. Acquire ORDER tokens (Uniswap, exchanges)
-2. In Hub, go to "Graduation" section
-3. Click "Graduate Now"
-4. Approve token spend
-5. Confirm staking transaction
-6. Wait for confirmation (usually <1 minute)
+| Tier | Requirement | Base Taker Fee |
+|------|-------------|----------------|
+| PUBLIC | None | 3.00 bps |
+| SILVER | $30M vol OR 100K ORDER | 2.75 bps |
+| GOLD | $90M vol OR 250K ORDER | 2.50 bps |
+| PLATINUM | $1B vol OR 2M ORDER | 2.00 bps |
+| DIAMOND | $10B vol OR 7M ORDER | 1.00 bps |
 
-### After Graduation
+**Important:** Stake ORDER from the same wallet used to create your DEX.
 
-You receive:
-- Full deployment rights
-- Access to secrets/API keys
-- Priority support channel
-- Enhanced dashboard analytics
+## My DEX Dashboard Features
 
-## Configuration Values
+### Configure Your DEX (`/dex/config`)
+- Branding customization
+- Logo and color schemes
+- Social media links
+- Wallet configuration
 
-After graduation, find these in the Hub:
+### DEX Card Setup (`/dex/card`)
+- Board listing appearance
+- Description and banner
+- Token information
+- Only visible after graduation
 
-### BROKER_ID
-- Location: Profile/Settings
-- Format: String (your chosen ID)
-- Example: `arthur_orderly`
+### Point Campaign (`/points`)
+- Volume-based rewards
+- PNL coefficients
+- Referral bonuses
 
-### ORDERLY_SECRET
-- Location: API Keys section
-- Format: Base58-encoded private key
-- **Keep this secure!** Never commit to git
+### Referral Settings (`/referral`)
+- Auto referral program
+- Commission structure
+- Community growth tools
 
-### ORDERLY_ACCOUNT_ID
-- Location: Account section
-- Format: Hex address
-- Example: `0x1234...abcd`
+### Deployment Status
+- View GitHub Actions status
+- Track deployment progress
+- Recent workflow runs
 
-## Dashboard Features
+## Custom Domain
 
-### Analytics
-- Trading volume (24h, 7d, 30d)
-- Number of trades
-- Unique traders
-- Revenue earned
+Configure in My DEX → Custom Domain Setup.
 
-### Revenue
-- Real-time fee accrual
-- Settlement history
-- Payout schedule
-- Revenue breakdown by pair
+### DNS Requirements
 
-### Settings
-- Update profile
-- Regenerate API keys
-- Configure webhooks
-- Manage team access
+**A Records (4 required):**
+```
+Type: A
+Name: @
+Values:
+  185.199.108.153
+  185.199.109.153
+  185.199.110.153
+  185.199.111.153
+TTL: 3600
+```
 
-## Revenue Model
+**CNAME Record:**
+```
+Type: CNAME
+Name: www
+Value: orderlynetworkdexcreator.github.io
+TTL: 3600
+```
 
-### How Fees Work
+### TradingView License
+Custom domains require your own TradingView Advanced Charts license.
+Apply at: https://www.tradingview.com/advanced-charts/
 
-1. User trades on your DEX
-2. Orderly charges trading fee (e.g., 0.05% taker, 0.02% maker)
-3. You receive a percentage of that fee
-4. Settlement happens periodically in USDC
+### Email Security (Recommended)
+```
+SPF: TXT @ "v=spf1 -all"
+DMARC: TXT _dmarc "v=DMARC1; p=reject; sp=reject; aspf=s; adkim=s"
+```
 
-### Revenue Tiers
+## Revenue & Analytics
 
-Higher volume = better revenue share. Exact tiers:
-- Check Orderly docs for current tier structure
-- Generally ranges from 30-70% revenue share
+### Fee Revenue
+- Claimable in graduation dashboard
+- Updated daily
+- Paid in USDC
 
-### Payout
+### WOOFi Swap Fees
+- Separate claimable balance
+- From swap page transactions
 
-- Minimum threshold: Usually $10-50 USDC
-- Frequency: Daily or weekly depending on tier
-- Method: Direct to connected wallet
+### Revenue Calculator
+Available at `/dex/graduation`:
+- Input expected volume
+- Select staking tier
+- Estimate monthly earnings
 
-## Support
+## Support & Resources
 
-- Discord: Orderly Network Discord
-- Docs: https://docs.orderly.network
-- Email: Support through Hub
-
-## Security Best Practices
-
-1. **Never share ORDERLY_SECRET**
-2. Use environment variables, not hardcoded values
-3. Rotate keys if compromised
-4. Enable 2FA on connected wallet
-5. Use hardware wallet for large stakes
+- **Docs:** https://orderly.network/docs
+- **Builder Guidelines:** https://orderly.network/docs/introduction/orderly-one/builder-guidelines
+- **Staking Info:** https://orderly.network/docs/build-on-omnichain/user-flows/builder-staking-programme
+- **Discord:** https://discord.com/invite/orderlynetwork
+- **Telegram:** https://t.me/Orderly_Discussions
